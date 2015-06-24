@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.SbeqEqui" table="sbeq_equi" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Equipos en operaci&#243;n del sistema, asignados en una estaci&#243;n o punto de venta externo</comment>
+        <id name="idEqui" type="int">
+            <column name="id_equi" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdMod" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_mod">
+                <comment>Identificador del modo de operaci&#243;n. Ejemplo: Torniquete(Entrada, Salida, Bidireccional), KVR(Ventas, Ventas y Recargas, etc)</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>fk - id tipo de equipos</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>fk - id estatus de equipos</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEdoEqui" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_edo_equi" not-null="true">
+                <comment>Estado del equipo (disponible, asignado, mantenimiento)</comment>
+            </column>
+        </many-to-one>
+        <property name="idInv" type="int">
+            <column name="id_inv" not-null="true" unique="true">
+                <comment>Identificador de la entidad de inventario asociada</comment>
+            </column>
+        </property>
+        <property name="dirIp" type="string">
+            <column name="dir_ip" length="15" not-null="true">
+                <comment>Direccion ip del equipo</comment>
+            </column>
+        </property>
+        <property name="fchAlta" type="timestamp">
+            <column name="fch_alta" length="29" not-null="true">
+                <comment>Fecha de alta del equipo</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>usuario que crea registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>fecha creacion de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>fecha modificacion de registro</comment>
+            </column>
+        </property>
+        <property name="noAfil" type="java.lang.Integer">
+            <column name="no_afil">
+                <comment>N&#250;mero de afiliaci&#243;n del equipo</comment>
+            </column>
+        </property>
+        <property name="idLinEst" type="java.lang.Integer">
+            <column name="id_lin_est">
+                <comment>Identificador de la l&#237;nea y estaci&#243;n en la que se ubica el equipo</comment>
+            </column>
+        </property>
+        <property name="idSuc" type="java.lang.Integer">
+            <column name="id_suc">
+                <comment>Identificador de la sucursal en la que se ubica el equipo</comment>
+            </column>
+        </property>
+        <property name="idVehi" type="java.lang.Integer">
+            <column name="id_vehi">
+                <comment>Identificador del vehiculo en que se ubica el equipo</comment>
+            </column>
+        </property>
+        <property name="noEcon" type="string">
+            <column name="no_econ" length="10">
+                <comment>Numero econ&#243;mico del vehiculo</comment>
+            </column>
+        </property>
+        <property name="numeSeri" type="string">
+            <column name="nume_seri" length="40">
+                <comment>N&#250;mero de serie del equipo, para TPV Pueblabus</comment>
+            </column>
+        </property>
+        <property name="idConSis" type="java.lang.Integer">
+            <column name="id_con_sis" />
+        </property>
+        <set name="sbopTurns" table="sbop_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_equi" not-null="true">
+                    <comment>Identificador del equipo en el que se registra el turno</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTurn" />
+        </set>
+        <set name="caupCeopConfEquis" table="caup_ceop_conf_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_equi" not-null="true">
+                    <comment>Identificador del equipo en la tabla sbeq_equi</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConfEqui" />
+        </set>
+    </class>
+</hibernate-mapping>

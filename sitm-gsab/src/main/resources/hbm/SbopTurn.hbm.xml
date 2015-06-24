@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.SbopTurn" table="sbop_turn" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Turnos de trabajo del empleado en puntos de venta y recarga, se registran totales del turno</comment>
+        <composite-id name="id" class="com.teknei.sitm.gsab.entities.SbopTurnId">
+            <key-property name="idTurn" type="long">
+                <column name="id_turn" />
+            </key-property>
+            <key-property name="idEqui" type="int">
+                <column name="id_equi" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>fk - id tipo del registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEdoSes" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_edo_ses">
+                <comment>Id del estado de la sesi&#243;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>fk - id estatus del registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sbeqEqui" class="com.teknei.sitm.gsab.entities.SbeqEqui" update="false" insert="false" fetch="select">
+            <column name="id_equi" not-null="true">
+                <comment>Identificador del equipo en el que se registra el turno</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sbopTarj" class="com.teknei.sitm.gsab.entities.SbopTarj" fetch="select">
+            <column name="id_tarj">
+                <comment>Identificador del empleado que opera el turno</comment>
+            </column>
+        </many-to-one>
+        <property name="tarjVend" type="java.lang.Integer">
+            <column name="tarj_vend">
+                <comment>Tarjetas vendidas</comment>
+            </column>
+        </property>
+        <property name="montTurn" type="big_decimal">
+            <column name="mont_turn" precision="13" scale="6">
+                <comment>Monto del turno</comment>
+            </column>
+        </property>
+        <property name="tarjExis" type="java.lang.Integer">
+            <column name="tarj_exis">
+                <comment>Tarjetas existentes al inicio del turno</comment>
+            </column>
+        </property>
+        <property name="montCanc" type="java.lang.Integer">
+            <column name="mont_canc">
+                <comment>Monto de la cancelaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>usuario que crea registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>fecha creacion de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>fecha modificacion de registro</comment>
+            </column>
+        </property>
+        <property name="fchIniTurn" type="timestamp">
+            <column name="fch_ini_turn" length="29">
+                <comment>Fecha inicio de turno</comment>
+            </column>
+        </property>
+        <property name="fchFinTurn" type="timestamp">
+            <column name="fch_fin_turn" length="29">
+                <comment>Fecha de fin de turno</comment>
+            </column>
+        </property>
+        <property name="uidTarj" type="string">
+            <column name="uid_tarj" length="20">
+                <comment>UID de la tarjeta del empleado que opera el turno</comment>
+            </column>
+        </property>
+        <property name="idConSis" type="java.lang.Integer">
+            <column name="id_con_sis" />
+        </property>
+        <set name="sbopAsgnTurns" table="sbop_asgn_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_turn" not-null="true">
+                    <comment>Identificador de turno al que pertenece el registro historico de asignaci&#243;n</comment>
+                </column>
+                <column name="id_equi" not-null="true" />
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopAsgnTurn" />
+        </set>
+        <set name="sbopTrans" table="sbop_tran" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_turn" not-null="true">
+                    <comment>Identificador del turno en el cual se realiza la operaci&#243;n</comment>
+                </column>
+                <column name="id_equi" not-null="true" />
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTran" />
+        </set>
+    </class>
+</hibernate-mapping>

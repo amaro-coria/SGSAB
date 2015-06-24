@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CctmProd" table="cctm_prod" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Productos en el sistema, descripciones fisicas e identificadores</comment>
+        <id name="idProd" type="int">
+            <column name="id_prod" />
+            <generator class="assigned" />
+        </id>
+        <property name="codProd" type="string">
+            <column name="cod_prod" length="10" not-null="true">
+                <comment>C&#243;digo del producto</comment>
+            </column>
+        </property>
+        <property name="desProd" type="string">
+            <column name="des_prod" length="120" not-null="true">
+                <comment>Descripci&#243;n breve del producto</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Nombre del usuario que cre&#243; el producto</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del producto</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Nombre de usuario que modifica el producto</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha de modificaci&#243;n del producto</comment>
+            </column>
+        </property>
+        <property name="idGpro" type="java.lang.Integer">
+            <column name="id_gpro">
+                <comment>Grupo del producto</comment>
+            </column>
+        </property>
+        <property name="idProa" type="java.lang.Integer">
+            <column name="id_proa">
+                <comment>N&#250;mero de producto antiguo</comment>
+            </column>
+        </property>
+        <property name="idUmed" type="int">
+            <column name="id_umed" not-null="true">
+                <comment>Unidad de medida base</comment>
+            </column>
+        </property>
+        <property name="idUmep" type="java.lang.Integer">
+            <column name="id_umep">
+                <comment>Unidad de medida de pedido</comment>
+            </column>
+        </property>
+        <property name="dimProd" type="string">
+            <column name="dim_prod" length="32">
+                <comment>Tama&#241;o/dimensi&#243;n</comment>
+            </column>
+        </property>
+        <property name="matProd" type="string">
+            <column name="mat_prod" length="48">
+                <comment>Materia</comment>
+            </column>
+        </property>
+        <property name="din" type="string">
+            <column name="din" length="18">
+                <comment>Denominaci&#243;n de est&#225;ndar (p.ej.din)</comment>
+            </column>
+        </property>
+        <property name="pesoNeto" type="big_decimal">
+            <column name="peso_neto" precision="13" scale="3">
+                <comment>Peso bruto</comment>
+            </column>
+        </property>
+        <property name="pesoBrut" type="big_decimal">
+            <column name="peso_brut" precision="13" scale="3">
+                <comment>Peso neto</comment>
+            </column>
+        </property>
+        <property name="idUpes" type="java.lang.Integer">
+            <column name="id_upes">
+                <comment>Unidad de peso</comment>
+            </column>
+        </property>
+        <property name="volTot" type="big_decimal">
+            <column name="vol_tot" precision="13" scale="3">
+                <comment>Volumen</comment>
+            </column>
+        </property>
+        <property name="idUvol" type="java.lang.Integer">
+            <column name="id_uvol">
+                <comment>Unidad de volumen</comment>
+            </column>
+        </property>
+        <property name="conAlma" type="string">
+            <column name="con_alma" length="2">
+                <comment>Condiciones de almacenaje</comment>
+            </column>
+        </property>
+        <property name="indTemp" type="string">
+            <column name="ind_temp" length="2">
+                <comment>Indicador para condiciones de temperatura</comment>
+            </column>
+        </property>
+        <property name="idSect" type="java.lang.Integer">
+            <column name="id_sect">
+                <comment>Sector</comment>
+            </column>
+        </property>
+        <property name="idCeti" type="java.lang.Short">
+            <column name="id_ceti">
+                <comment>Clase de etiqueta</comment>
+            </column>
+        </property>
+        <property name="idFeti" type="java.lang.Integer">
+            <column name="id_feti">
+                <comment>Forma de etiqueta</comment>
+            </column>
+        </property>
+        <property name="inac" type="java.lang.Character">
+            <column name="inac" length="1">
+                <comment>Desactivado</comment>
+            </column>
+        </property>
+        <property name="ean" type="string">
+            <column name="ean" length="18">
+                <comment>N&#250;mero de art&#237;culo europeo (ean)</comment>
+            </column>
+        </property>
+        <property name="dimLong" type="big_decimal">
+            <column name="dim_long" precision="13" scale="3">
+                <comment>Longitud</comment>
+            </column>
+        </property>
+        <property name="dimAnch" type="big_decimal">
+            <column name="dim_anch" precision="13" scale="3">
+                <comment>Ancho</comment>
+            </column>
+        </property>
+        <property name="dimAltu" type="big_decimal">
+            <column name="dim_altu" precision="13" scale="3">
+                <comment>Altura</comment>
+            </column>
+        </property>
+        <property name="idUlaa" type="java.lang.Integer">
+            <column name="id_ulaa">
+                <comment>Unidad de medida para longitud/ancho/altura</comment>
+            </column>
+        </property>
+        <property name="fchIniVal" type="date">
+            <column name="fch_ini_val" length="13">
+                <comment>Fecha inicio validez</comment>
+            </column>
+        </property>
+        <property name="fchLiq" type="date">
+            <column name="fch_liq" length="13">
+                <comment>Fecha de liquidaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="idCpro" type="java.lang.Integer">
+            <column name="id_cpro">
+                <comment>Categor&#237;a de producto</comment>
+            </column>
+        </property>
+        <property name="idCfis" type="java.lang.Integer">
+            <column name="id_cfis">
+                <comment>Clasificaci&#243;n fiscal producto</comment>
+            </column>
+        </property>
+        <property name="numPiez" type="string">
+            <column name="num_piez" length="40">
+                <comment>Numero pieza fabricante</comment>
+            </column>
+        </property>
+        <property name="numFabr" type="string">
+            <column name="num_fabr" length="10">
+                <comment>N&#250;mero de un fabricante</comment>
+            </column>
+        </property>
+        <property name="indVisc" type="string">
+            <column name="ind_visc">
+                <comment>Indicador: viscosidad elevada</comment>
+            </column>
+        </property>
+        <property name="idPais" type="java.lang.Integer">
+            <column name="id_pais">
+                <comment>Pa&#237;s de origen del producto (origen cci)</comment>
+            </column>
+        </property>
+        <property name="prec" type="java.lang.Character">
+            <column name="prec" length="1">
+                <comment>Precio de variante permitido (relativo a maestro art&#237;culos)</comment>
+            </column>
+        </property>
+        <property name="idMarc" type="java.lang.Integer">
+            <column name="id_marc">
+                <comment>Marca</comment>
+            </column>
+        </property>
+        <property name="codBarr" type="string">
+            <column name="cod_barr" length="14">
+                <comment>C&#243;digo de barras</comment>
+            </column>
+        </property>
+        <property name="idMedi" type="java.lang.Integer">
+            <column name="id_medi">
+                <comment>Identificador de medida</comment>
+            </column>
+        </property>
+        <property name="idEsta" type="int">
+            <column name="id_esta" not-null="true">
+                <comment>Estatus de actualizacion del producto</comment>
+            </column>
+        </property>
+        <property name="idTipo" type="int">
+            <column name="id_tipo" not-null="true">
+                <comment>Tipo de producto</comment>
+            </column>
+        </property>
+        <property name="cantAlmaMini" type="java.lang.Integer">
+            <column name="cant_alma_mini">
+                <comment>cantidad minima en almacen</comment>
+            </column>
+        </property>
+        <property name="cantAlmaMaxi" type="java.lang.Integer">
+            <column name="cant_alma_maxi">
+                <comment>cantidad maxima en almacen</comment>
+            </column>
+        </property>
+        <property name="tiemAlmaMini" type="java.lang.Integer">
+            <column name="tiem_alma_mini">
+                <comment>tiempo minimo en almacen</comment>
+            </column>
+        </property>
+        <property name="tiemAlmaMaxi" type="java.lang.Integer">
+            <column name="tiem_alma_maxi">
+                <comment>tiempo maximo en almacen</comment>
+            </column>
+        </property>
+        <property name="tiemCadu" type="java.lang.Integer">
+            <column name="tiem_cadu">
+                <comment>tiempo caducidad</comment>
+            </column>
+        </property>
+        <property name="precAnteCont" type="big_decimal">
+            <column name="prec_ante_cont" precision="13">
+                <comment>precio anterior del producto</comment>
+            </column>
+        </property>
+        <property name="precActuCont" type="big_decimal">
+            <column name="prec_actu_cont" precision="13">
+                <comment>precio actual del producto</comment>
+            </column>
+        </property>
+        <property name="stocTotaCont" type="java.lang.Integer">
+            <column name="stoc_tota_cont">
+                <comment>stok total en almacen</comment>
+            </column>
+        </property>
+        <property name="valoTotaCont" type="big_decimal">
+            <column name="valo_tota_cont" precision="13">
+                <comment>valor total del producto</comment>
+            </column>
+        </property>
+        <property name="idConSis" type="java.lang.Integer">
+            <column name="id_con_sis" />
+        </property>
+        <set name="caupCeopConfs" table="caup_ceop_conf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_prod" not-null="true">
+                    <comment>Identificador de producto en cctm_prod</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConf" />
+        </set>
+    </class>
+</hibernate-mapping>

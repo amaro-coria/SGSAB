@@ -1,0 +1,587 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CctmCata" table="cctm_cata" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Cat&#225;logo de SITM</comment>
+        <id name="idCata" type="int">
+            <column name="id_cata" />
+            <generator class="assigned" />
+        </id>
+        <property name="codCata" type="string">
+            <column name="cod_cata" length="10" not-null="true">
+                <comment>Nombre del Cat&#225;logo</comment>
+            </column>
+        </property>
+        <property name="codCort" type="string">
+            <column name="cod_cort" length="10" not-null="true">
+                <comment>C&#243;digo Corto</comment>
+            </column>
+        </property>
+        <property name="codComp" type="string">
+            <column name="cod_comp" length="20">
+                <comment>C&#243;digo Completo</comment>
+            </column>
+        </property>
+        <property name="desCort" type="string">
+            <column name="des_cort" length="120" not-null="true">
+                <comment>Descripci&#243;n Corta</comment>
+            </column>
+        </property>
+        <property name="desComp" type="string">
+            <column name="des_comp" length="256">
+                <comment>Descripci&#243;n Completa</comment>
+            </column>
+        </property>
+        <property name="ordeCata" type="java.lang.Integer">
+            <column name="orde_cata">
+                <comment>Orden del Cat&#225;logo</comment>
+            </column>
+        </property>
+        <property name="idIdio" type="java.lang.Integer">
+            <column name="id_idio">
+                <comment>Idioma del Cat&#225;logo</comment>
+            </column>
+        </property>
+        <property name="idEcat" type="int">
+            <column name="id_ecat" not-null="true">
+                <comment>Estatus</comment>
+            </column>
+        </property>
+        <property name="idTcat" type="int">
+            <column name="id_tcat" not-null="true">
+                <comment>Tipo del Cat&#225;logo</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea el Registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha en la que se Modific&#243; el Registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Usuario que Modifico el Registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha en la que se modifico el Registro</comment>
+            </column>
+        </property>
+        <set name="sbopTurnsForIdTipo" table="sbop_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>fk - id tipo del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTurn" />
+        </set>
+        <set name="gsabDocuPersesForIdTipo" table="gsab_docu_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador de tipo en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.GsabDocuPers" />
+        </set>
+        <set name="cctmPersesForIdEper" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_eper">
+                    <comment>fk - id Estatus de la Persona</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+        <set name="coacTcresForTipoCred" table="coac_tcre" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipo_cred" not-null="true" />
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CoacTcre" />
+        </set>
+        <set name="sbeqEquisForIdMod" table="sbeq_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_mod">
+                    <comment>Identificador del modo de operaci&#243;n. Ejemplo: Torniquete(Entrada, Salida, Bidireccional), KVR(Ventas, Ventas y Recargas, etc)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbeqEqui" />
+        </set>
+        <set name="cctmDiresForIdTipo" table="cctm_dire" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>For&#225;nea Tipo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmDire" />
+        </set>
+        <set name="sbopTurnsForIdEdoSes" table="sbop_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_edo_ses">
+                    <comment>Id del estado de la sesi&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTurn" />
+        </set>
+        <set name="coacTcresForIdEsta" table="coac_tcre" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Estatus del Dato</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CoacTcre" />
+        </set>
+        <set name="sbopTransForIdMotCanc" table="sbop_tran" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_mot_canc">
+                    <comment>Identificador del motivo de la cancelaci&#243;n: Error cajero, Error dinero, Otro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTran" />
+        </set>
+        <set name="sbopAsgnTurnsForIdTipo" table="sbop_asgn_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>fk - id tipo de equipos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopAsgnTurn" />
+        </set>
+        <set name="coacTcresForIdTipo" table="coac_tcre" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Tipo del Dato</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CoacTcre" />
+        </set>
+        <set name="caupCeopsForIdTipo" table="caup_ceop" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador del tipo de registro en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeop" />
+        </set>
+        <set name="caupCeopConfEquisForIdTipo" table="caup_ceop_conf_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador del tipo de registro en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConfEqui" />
+        </set>
+        <set name="sbeqEquisForIdTipo" table="sbeq_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>fk - id tipo de equipos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbeqEqui" />
+        </set>
+        <set name="cctmEmpsForIdLgarTrab" table="cctm_emp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_lgar_trab" not-null="true">
+                    <comment>FK -Identificador del lugar de trabajo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmEmp" />
+        </set>
+        <set name="cctmDiresForIdEsta" table="cctm_dire" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>For&#225;nea Estatus</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmDire" />
+        </set>
+        <set name="sbopTarjsForIdTcre" table="sbop_tarj" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tcre" not-null="true">
+                    <comment>Id de tipo de credencial SIMT (Monedero electronico normal, Monedero electronico prapago por viajes, prepago pase por dia, super usuario y
+                    preferentes)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTarj" />
+        </set>
+        <set name="sbopTransForIdEmprTarj" table="sbop_tran" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empr_tarj">
+                    <comment>Identificador de la empresa a la que pertenece la Tarjeta: ATT, TKN, otro.</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTran" />
+        </set>
+        <set name="sbeqEquisForIdEsta" table="sbeq_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>fk - id estatus de equipos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbeqEqui" />
+        </set>
+        <set name="caupAsigTarjPrefsForTipUsua" table="caup_asig_tarj_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tip_usua" not-null="true">
+                    <comment>Tipo de usuario en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupAsigTarjPref" />
+        </set>
+        <set name="sbopTransForIdTipo" table="sbop_tran" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>fk - id tipo de transacciones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTran" />
+        </set>
+        <set name="caupUsuaEmplsForIdEsta" table="caup_usua_empl" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador de estatus en la tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaEmpl" />
+        </set>
+        <set name="cctmPersesForIdEciv" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_eciv">
+                    <comment>fk - id Estado Civil</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+        <set name="gsabDocuPersesForIdEsta" table="gsab_docu_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador del estatus del usuario en la tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.GsabDocuPers" />
+        </set>
+        <set name="sbopTarjsForIdTtar" table="sbop_tarj" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ttar" not-null="true">
+                    <comment>Id de tipo de Tarjeta (Mifare, Mifare Plus y Desfire)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTarj" />
+        </set>
+        <set name="sbopAsgnTurnsForIdEsta" table="sbop_asgn_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>fk - id estatus de equipos</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopAsgnTurn" />
+        </set>
+        <set name="caupUsuaEmplsForIdTipo" table="caup_usua_empl" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador de tipo en la tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaEmpl" />
+        </set>
+        <set name="cctmPersesForIdPais" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_pais">
+                    <comment>fk - id Pa&#237;s</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+        <set name="sbopTransForIdEsta" table="sbop_tran" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>fk - id estatus de las transacciones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTran" />
+        </set>
+        <set name="cctmEstdsForIdTipo" table="cctm_estd" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador del tipo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmEstd" />
+        </set>
+        <set name="caupAsigTarjPrefsForIdEsta" table="caup_asig_tarj_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador del estatus del usuario en la tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupAsigTarjPref" />
+        </set>
+        <set name="cctmColnsForIdEsta" table="cctm_coln" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>For&#225;nea Estatus</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmColn" />
+        </set>
+        <set name="sbeqEquisForIdEdoEqui" table="sbeq_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_edo_equi" not-null="true">
+                    <comment>Estado del equipo (disponible, asignado, mantenimiento)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbeqEqui" />
+        </set>
+        <set name="cctmEstdsForIdEsta" table="cctm_estd" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador del estatus</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmEstd" />
+        </set>
+        <set name="caupUsuaPrefsForIdTipoIden" table="caup_usua_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo_iden">
+                    <comment>id del tipo de identificacion presentada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaPref" />
+        </set>
+        <set name="cctmPersesForIdEsta" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true" />
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+        <set name="cctmPersesForIdSexo" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_sexo">
+                    <comment>fk - id Sexo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+        <set name="caupUsuaPrefsForIdEsta" table="caup_usua_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador de estatus en la tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaPref" />
+        </set>
+        <set name="cctmCodpsForIdTipo" table="cctm_codp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>For&#225;nea Tipo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmCodp" />
+        </set>
+        <set name="sbopTarjsForIdEdoTarj" table="sbop_tarj" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_edo_tarj" not-null="true">
+                    <comment>Identificador del estado operativo de la tarjeta(Operaci&#243;n, Bloqueado, Inventario, Cargado, etc)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTarj" />
+        </set>
+        <set name="cctmPersesForIdTper" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tper">
+                    <comment>fk - id Tipo de Persona (F&#237;sica o Moral)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+        <set name="caupAsigTarjPrefsForIdTipo" table="caup_asig_tarj_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador del tipo de ingreso de usuario en la tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupAsigTarjPref" />
+        </set>
+        <set name="cctmColnsForIdTipo" table="cctm_coln" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>For&#225;nea Tipo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmColn" />
+        </set>
+        <set name="caupUsuaPrefsForIdTipo" table="caup_usua_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador de tipo en la tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaPref" />
+        </set>
+        <set name="cctmPersesForIdTipo" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo">
+                    <comment>fk - id Tipo de Cat&#225;logo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+        <set name="caupUsuaPrefsForIdTipoIdenPref" table="caup_usua_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo_iden_pref">
+                    <comment>id del tipo de identificacion preferencial presentada</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaPref" />
+        </set>
+        <set name="cctmMncpsForIdEsta" table="cctm_mncp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>For&#225;nea Estatus del dato</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmMncp" />
+        </set>
+        <set name="cctmCiudsForIdEsta" table="cctm_ciud" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador del estatus</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmCiud" />
+        </set>
+        <set name="caupCeopConfEquisForIdEsta" table="caup_ceop_conf_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador del estado en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConfEqui" />
+        </set>
+        <set name="cctmCodpsForIdEsta" table="cctm_codp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>For&#225;nea Estatus</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmCodp" />
+        </set>
+        <set name="caupCeopConfsForIdTipo" table="caup_ceop_conf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador del tipo de registro en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConf" />
+        </set>
+        <set name="caupCeopsForIdEsta" table="caup_ceop" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador del estado de registro en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeop" />
+        </set>
+        <set name="coacScresForIdTipo" table="coac_scre" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Tipo del Dato</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CoacScre" />
+        </set>
+        <set name="coacScresForIdEsta" table="coac_scre" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Estatus del Dato</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CoacScre" />
+        </set>
+        <set name="caupCeopConfsForIdEsta" table="caup_ceop_conf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador de estado de registro en tabla cctm_cata</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConf" />
+        </set>
+        <set name="cctmEmpsForIdTipo" table="cctm_emp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo">
+                    <comment>FK - Id tipo de cat&#225;logo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmEmp" />
+        </set>
+        <set name="sbopTarjsForIdTipo" table="sbop_tarj" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador del tipo del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTarj" />
+        </set>
+        <set name="cctmCiudsForIdTipo" table="cctm_ciud" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>Identificador del tipo</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmCiud" />
+        </set>
+        <set name="sbopTarjsForIdEsta" table="sbop_tarj" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>Identificador de estado del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTarj" />
+        </set>
+        <set name="cctmMncpsForIdTipo" table="cctm_mncp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tipo" not-null="true">
+                    <comment>For&#225;nea Tipo del dato</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmMncp" />
+        </set>
+        <set name="sbopTurnsForIdEsta" table="sbop_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>fk - id estatus del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTurn" />
+        </set>
+        <set name="sbopTarjsForIdTlla" table="sbop_tarj" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tlla">
+                    <comment>Id de tipo de Llave(Llave Operativa, Llave maestra)</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTarj" />
+        </set>
+        <set name="cctmEmpsForIdEsta" table="cctm_emp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_esta" not-null="true">
+                    <comment>FK - Id estado del registro</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmEmp" />
+        </set>
+        <set name="cctmPersesForIdPaes" table="cctm_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_paes">
+                    <comment>fk - id Estado de la Rep&#250;blica</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmPers" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.GsabPerfAccs" table="gsab_perf_accs" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Registro de perfiles de acceso al sistema Gestor SAB</comment>
+        <id name="idPerfAccs" type="int">
+            <column name="id_perf_accs" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomPerfAccs" type="string">
+            <column name="nom_perf_accs" length="50" not-null="true">
+                <comment>Nombre del perfil de acceso</comment>
+            </column>
+        </property>
+        <property name="idEsta" type="int">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador de estatus en tabla cctm_cata</comment>
+            </column>
+        </property>
+        <property name="idTipo" type="int">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador de tipo en tabla cctm_cata</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Nombre del usuario que cre&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Nombre del usuario que modific&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha de modificaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <set name="gsabPermPerfs" table="gsab_perm_perf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_perf_accs" not-null="true" />
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.GsabPermPerf" />
+        </set>
+        <one-to-one name="gsabUsrPerf" class="com.teknei.sitm.gsab.entities.GsabUsrPerf"></one-to-one>
+    </class>
+</hibernate-mapping>

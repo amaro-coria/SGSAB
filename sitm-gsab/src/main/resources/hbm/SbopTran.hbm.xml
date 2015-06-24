@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.SbopTran" table="sbop_tran" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Transacciones generadas por la venta y recarga de saldo en tarjetas contactless</comment>
+        <composite-id name="id" class="com.teknei.sitm.gsab.entities.SbopTranId">
+            <key-property name="idTran" type="int">
+                <column name="id_tran" />
+            </key-property>
+            <key-property name="idTurn" type="int">
+                <column name="id_turn" />
+            </key-property>
+            <key-property name="idEqui" type="int">
+                <column name="id_equi" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cctmCataByIdMotCanc" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_mot_canc">
+                <comment>Identificador del motivo de la cancelaci&#243;n: Error cajero, Error dinero, Otro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEmprTarj" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_empr_tarj">
+                <comment>Identificador de la empresa a la que pertenece la Tarjeta: ATT, TKN, otro.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>fk - id tipo de transacciones</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>fk - id estatus de las transacciones</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sbopTarj" class="com.teknei.sitm.gsab.entities.SbopTarj" fetch="select">
+            <column name="id_tarj">
+                <comment>Identificador de la tarjeta en donde se realiza la operaci&#243;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sbopTurn" class="com.teknei.sitm.gsab.entities.SbopTurn" update="false" insert="false" fetch="select">
+            <column name="id_turn" not-null="true">
+                <comment>Identificador del turno en el cual se realiza la operaci&#243;n</comment>
+            </column>
+            <column name="id_equi" not-null="true" />
+        </many-to-one>
+        <property name="uidTarj" type="string">
+            <column name="uid_tarj" length="20">
+                <comment>UID de la tarjeta donde se realiza la operaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="impoWeb" type="big_decimal">
+            <column name="impo_web" precision="7">
+                <comment>importe en web</comment>
+            </column>
+        </property>
+        <property name="canc" type="java.lang.Character">
+            <column name="canc" length="1">
+                <comment>Cancelaci&#243;n de la transacci&#243;n</comment>
+            </column>
+        </property>
+        <property name="montChcr" type="big_decimal">
+            <column name="mont_chcr" precision="13" scale="6">
+                <comment>monto chip de credito</comment>
+            </column>
+        </property>
+        <property name="tipoTran" type="char">
+            <column name="tipo_tran" length="1" not-null="true">
+                <comment>tipo de transacciones</comment>
+            </column>
+        </property>
+        <property name="fchTran" type="timestamp">
+            <column name="fch_tran" length="29" not-null="true">
+                <comment>fecha de la transaccion</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>usuario que crea registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>fecha creacion de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>fecha modificacion de registro</comment>
+            </column>
+        </property>
+        <property name="idLbla" type="java.lang.Integer">
+            <column name="id_lbla">
+                <comment>Identificador de lista blanca en caso de recarga web - FALTA ASOCIACION</comment>
+            </column>
+        </property>
+        <property name="impoTran" type="big_decimal">
+            <column name="impo_tran" precision="7">
+                <comment>Importe de la transacci&#243;n</comment>
+            </column>
+        </property>
+        <property name="idConSis" type="java.lang.Integer">
+            <column name="id_con_sis" />
+        </property>
+    </class>
+</hibernate-mapping>

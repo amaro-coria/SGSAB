@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CctmCiud" table="cctm_ciud" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tabla de ciudades Sepomex</comment>
+        <composite-id name="id" class="com.teknei.sitm.gsab.entities.CctmCiudId">
+            <key-property name="idCiud" type="int">
+                <column name="id_ciud" />
+            </key-property>
+            <key-property name="idEstd" type="int">
+                <column name="id_estd" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador del estatus</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador del tipo</comment>
+            </column>
+        </many-to-one>
+        <property name="nomCiud" type="string">
+            <column name="nom_ciud" length="50">
+                <comment>Nombre de la ciudad</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Nombre del usuario que cre&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <set name="cctmDires" table="cctm_dire" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estd">
+                    <comment>For&#225;nea Tabla de ciudades</comment>
+                </column>
+                <column name="id_ciud">
+                    <comment>For&#225;nea Tabla de ciudades</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmDire" />
+        </set>
+    </class>
+</hibernate-mapping>

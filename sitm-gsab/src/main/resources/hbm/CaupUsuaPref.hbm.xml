@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CaupUsuaPref" table="caup_usua_pref" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tabla de registro de usuarios preferentes</comment>
+        <id name="idUsuaPref" type="int">
+            <column name="id_usua_pref" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdTipoIden" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo_iden">
+                <comment>id del tipo de identificacion presentada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador de estatus en la tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador de tipo en la tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipoIdenPref" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo_iden_pref">
+                <comment>id del tipo de identificacion preferencial presentada</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmPers" class="com.teknei.sitm.gsab.entities.CctmPers" fetch="select">
+            <column name="id_pers" not-null="true">
+                <comment>Identificador de la persona en la tabla cctm_pers</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="coacScre" class="com.teknei.sitm.gsab.entities.CoacScre" fetch="select">
+            <column name="id_scre" not-null="true">
+                <comment>Identificador subtipo de credencial</comment>
+            </column>
+        </many-to-one>
+        <property name="telUsua" type="string">
+            <column name="tel_usua" length="15">
+                <comment>Telefono del Usuario</comment>
+            </column>
+        </property>
+        <property name="corUsua" type="string">
+            <column name="cor_usua" length="40">
+                <comment>Correo del usuario</comment>
+            </column>
+        </property>
+        <property name="fchIni" type="date">
+            <column name="fch_ini" length="13">
+                <comment>Fecha inicio de asignaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="fchFin" type="date">
+            <column name="fch_fin" length="13">
+                <comment>Fecha fin de asignaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Nombre del usuario que cre&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Nombre del usuario que modific&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha de modificaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="foliRegi" type="string">
+            <column name="foli_regi" length="15">
+                <comment>folio del registro en originador</comment>
+            </column>
+        </property>
+        <property name="foliCred" type="string">
+            <column name="foli_cred" length="25">
+                <comment>folio de credencial presentada</comment>
+            </column>
+        </property>
+        <property name="fchAfil" type="date">
+            <column name="fch_afil" length="13">
+                <comment>fecha de afiliacion</comment>
+            </column>
+        </property>
+        <property name="cmnt" type="string">
+            <column name="cmnt" length="100">
+                <comment>comentarios</comment>
+            </column>
+        </property>
+        <property name="dire" type="string">
+            <column name="dire">
+                <comment>captura de la direccion manual en formatos</comment>
+            </column>
+        </property>
+        <property name="idDire" type="java.lang.Integer">
+            <column name="id_dire">
+                <comment>id de la direccion en sistema</comment>
+            </column>
+        </property>
+        <property name="persAuto" type="string">
+            <column name="pers_auto" length="100">
+                <comment>persona que autorizo el registro</comment>
+            </column>
+        </property>
+        <set name="gsabDocuPerses" table="gsab_docu_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usua_pref">
+                    <comment>Identificador de usuario preferente</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.GsabDocuPers" />
+        </set>
+        <set name="caupAsigTarjPrefs" table="caup_asig_tarj_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usua_pref" not-null="true">
+                    <comment>Identificador unico de usuario en caup_usua_pref</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupAsigTarjPref" />
+        </set>
+    </class>
+</hibernate-mapping>

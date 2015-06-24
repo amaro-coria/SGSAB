@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.GsabLogOper" table="gsab_log_oper" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tabla que registra las operaciones realizadas en el sistema</comment>
+        <id name="idLogOper" type="long">
+            <column name="id_log_oper" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="gsabModOper" class="com.teknei.sitm.gsab.entities.GsabModOper" fetch="select">
+            <column name="id_mod_oper">
+                <comment>Identificador del m&#243;dulo en donde se genera la operaci&#243;n</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="gsabSmodOper" class="com.teknei.sitm.gsab.entities.GsabSmodOper" fetch="select">
+            <column name="id_smod_oper">
+                <comment>Identificador del submodulo en donde se genera la operaci&#243;n</comment>
+            </column>
+        </many-to-one>
+        <property name="codMsgApi" type="string">
+            <column name="cod_msg_api" length="8">
+                <comment>Codigo devuelto por la librer&#237;a tkp_api</comment>
+            </column>
+        </property>
+        <property name="msgApiOpe" type="string">
+            <column name="msg_api_ope" length="120">
+                <comment>Mensaje registro de operaci&#243;n que env&#237;a likbrer&#237;a tkp</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

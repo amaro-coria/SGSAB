@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CaupCeop" table="caup_ceop" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Registro de centros de operacion CAU</comment>
+        <id name="idCeop" type="int">
+            <column name="id_ceop" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador del tipo de registro en tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador del estado de registro en tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmEmp" class="com.teknei.sitm.gsab.entities.CctmEmp" fetch="select">
+            <column name="id_emp" not-null="true">
+                <comment>Identificador de responsable del centro de operaciones</comment>
+            </column>
+        </many-to-one>
+        <property name="fchIni" type="date">
+            <column name="fch_ini" length="13" not-null="true">
+                <comment>Fecha de inicio de operaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="fchFin" type="date">
+            <column name="fch_fin" length="13">
+                <comment>Fecha fin de operaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="codCeop" type="string">
+            <column name="cod_ceop" length="10" not-null="true">
+                <comment>C&#243;digo de centro de operaciones</comment>
+            </column>
+        </property>
+        <property name="desCeop" type="string">
+            <column name="des_ceop" length="120">
+                <comment>Descripci&#243;n de centro de operaciones</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha creaci&#243;n de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha modificac&#243;n de registro</comment>
+            </column>
+        </property>
+        <set name="caupCeopConfs" table="caup_ceop_conf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_caup_ceop" not-null="true">
+                    <comment>Identificador de centro de operaciones en tabla caup_ceop</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConf" />
+        </set>
+    </class>
+</hibernate-mapping>

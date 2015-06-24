@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CctmPers" table="cctm_pers" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Datos que identifican a una persona en el sistema</comment>
+        <id name="idPers" type="int">
+            <column name="id_pers" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdEper" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_eper">
+                <comment>fk - id Estatus de la Persona</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEciv" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_eciv">
+                <comment>fk - id Estado Civil</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdPais" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_pais">
+                <comment>fk - id Pa&#237;s</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cctmCataByIdSexo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_sexo">
+                <comment>fk - id Sexo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTper" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tper">
+                <comment>fk - id Tipo de Persona (F&#237;sica o Moral)</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo">
+                <comment>fk - id Tipo de Cat&#225;logo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdPaes" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_paes">
+                <comment>fk - id Estado de la Rep&#250;blica</comment>
+            </column>
+        </many-to-one>
+        <property name="apePat" type="string">
+            <column name="ape_pat" length="50">
+                <comment>Apellido Paterno</comment>
+            </column>
+        </property>
+        <property name="apeMat" type="string">
+            <column name="ape_mat" length="50">
+                <comment>Apellido Materno</comment>
+            </column>
+        </property>
+        <property name="nomb" type="string">
+            <column name="nomb" length="100">
+                <comment>Nombre</comment>
+            </column>
+        </property>
+        <property name="razSoc" type="string">
+            <column name="raz_soc" length="120">
+                <comment>Raz&#243;n Social</comment>
+            </column>
+        </property>
+        <property name="rfc" type="string">
+            <column name="rfc" length="16">
+                <comment>Registro Federal de Contribuyentes</comment>
+            </column>
+        </property>
+        <property name="curp" type="string">
+            <column name="curp" length="18">
+                <comment>Clave &#218;nica de Registro de Poblaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="fchNaci" type="date">
+            <column name="fch_naci" length="13">
+                <comment>Fecha de Nacimiento</comment>
+            </column>
+        </property>
+        <property name="fchAlta" type="date">
+            <column name="fch_alta" length="13">
+                <comment>Fecha de Alta de la Empresa</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Nombre del usuario que cre&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Nombre del usuario que modific&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha de modificaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="idConSis" type="java.lang.Integer">
+            <column name="id_con_sis" />
+        </property>
+        <set name="caupUsuaPrefs" table="caup_usua_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_pers" not-null="true">
+                    <comment>Identificador de la persona en la tabla cctm_pers</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaPref" />
+        </set>
+        <set name="cctmEmps" table="cctm_emp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_pers" not-null="true">
+                    <comment>FK -Idetificador de la persona</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CctmEmp" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CaupCeopConf" table="caup_ceop_conf" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Configuraci&#243;n de centros de operaci&#243;n CAU</comment>
+        <id name="idCeopConf" type="int">
+            <column name="id_ceop_conf" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="caupCeop" class="com.teknei.sitm.gsab.entities.CaupCeop" fetch="select">
+            <column name="id_caup_ceop" not-null="true">
+                <comment>Identificador de centro de operaciones en tabla caup_ceop</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador del tipo de registro en tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador de estado de registro en tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmProd" class="com.teknei.sitm.gsab.entities.CctmProd" fetch="select">
+            <column name="id_prod" not-null="true">
+                <comment>Identificador de producto en cctm_prod</comment>
+            </column>
+        </many-to-one>
+        <property name="cantProd" type="java.lang.Integer">
+            <column name="cant_prod">
+                <comment>Cantidad de productos asociados a ceop</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha creaci&#243;n de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha modificaci&#243;n de registro</comment>
+            </column>
+        </property>
+        <set name="caupCeopConfEquis" table="caup_ceop_conf_equi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ceop_conf" not-null="true">
+                    <comment>Identificador de configuraci&#243;n en tabla ceop_conf</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeopConfEqui" />
+        </set>
+    </class>
+</hibernate-mapping>

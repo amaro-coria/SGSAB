@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CaupCeopConfEqui" table="caup_ceop_conf_equi" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Configuracipon de inventario de centros de operaci&#243;n CAU</comment>
+        <id name="idCeopConfEqui" type="int">
+            <column name="id_ceop_conf_equi" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="caupCeopConf" class="com.teknei.sitm.gsab.entities.CaupCeopConf" fetch="select">
+            <column name="id_ceop_conf" not-null="true">
+                <comment>Identificador de configuraci&#243;n en tabla ceop_conf</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador del tipo de registro en tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador del estado en tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sbeqEqui" class="com.teknei.sitm.gsab.entities.SbeqEqui" fetch="select">
+            <column name="id_equi" not-null="true">
+                <comment>Identificador del equipo en la tabla sbeq_equi</comment>
+            </column>
+        </many-to-one>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha creaci&#243;n de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha modificaci&#243;n de registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.SbopTarj" table="sbop_tarj" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tarjetas en operaci&#243;n en el sistema BRT</comment>
+        <id name="idTarj" type="int">
+            <column name="id_tarj" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdTcre" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tcre" not-null="true">
+                <comment>Id de tipo de credencial SIMT (Monedero electronico normal, Monedero electronico prapago por viajes, prepago pase por dia, super usuario y
+                preferentes)</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTtar" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_ttar" not-null="true">
+                <comment>Id de tipo de Tarjeta (Mifare, Mifare Plus y Desfire)</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEdoTarj" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_edo_tarj" not-null="true">
+                <comment>Identificador del estado operativo de la tarjeta(Operaci&#243;n, Bloqueado, Inventario, Cargado, etc)</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador del tipo del registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador de estado del registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTlla" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tlla">
+                <comment>Id de tipo de Llave(Llave Operativa, Llave maestra)</comment>
+            </column>
+        </many-to-one>
+        <property name="idInv" type="int">
+            <column name="id_inv" not-null="true">
+                <comment>Identificador del inventario asociado a la tarjeta</comment>
+            </column>
+        </property>
+        <property name="fchAlta" type="timestamp">
+            <column name="fch_alta" length="29" not-null="true">
+                <comment>Fecha de alta de la tarjeta</comment>
+            </column>
+        </property>
+        <property name="fchVig" type="timestamp">
+            <column name="fch_vig" length="29" not-null="true">
+                <comment>Fecha de vigencia de la tarjeta</comment>
+            </column>
+        </property>
+        <property name="fchCanc" type="timestamp">
+            <column name="fch_canc" length="29">
+                <comment>Fecha de cancelaci&#243;n de la tarjeta</comment>
+            </column>
+        </property>
+        <property name="detaCanc" type="string">
+            <column name="deta_canc" length="100">
+                <comment>Detalles de la cancelaci&#243;n de la tarjeta</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha creacion de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha modificacion de registro</comment>
+            </column>
+        </property>
+        <property name="idAsgnTarj" type="java.lang.Integer">
+            <column name="id_asgn_tarj">
+                <comment>Identificador de asignacion de la tarjeta</comment>
+            </column>
+        </property>
+        <property name="idConSis" type="java.lang.Integer">
+            <column name="id_con_sis" />
+        </property>
+        <set name="caupAsigTarjPrefs" table="caup_asig_tarj_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tarj" not-null="true">
+                    <comment>Identificador unico de targeta en sbop_tarj</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupAsigTarjPref" />
+        </set>
+        <set name="sbopTrans" table="sbop_tran" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tarj">
+                    <comment>Identificador de la tarjeta en donde se realiza la operaci&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTran" />
+        </set>
+        <set name="caupUsuaEmpls" table="caup_usua_empl" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tarj">
+                    <comment>Identificador de tarjeta en la tabla sbop_tarj</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaEmpl" />
+        </set>
+        <set name="sbopTurns" table="sbop_turn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_tarj">
+                    <comment>Identificador del empleado que opera el turno</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.SbopTurn" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CoacScre" table="coac_scre" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tabla de registo de los sub-tipos para control de acceso</comment>
+        <id name="idScre" type="int">
+            <column name="id_scre" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Tipo del Dato</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Estatus del Dato</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="coacTcre" class="com.teknei.sitm.gsab.entities.CoacTcre" fetch="select">
+            <column name="id_tcre" not-null="true">
+                <comment>ID del tipo a el que pertenece</comment>
+            </column>
+        </many-to-one>
+        <property name="codScre" type="string">
+            <column name="cod_scre" length="20" not-null="true">
+                <comment>D&#237;a que se registra</comment>
+            </column>
+        </property>
+        <property name="desScre" type="string">
+            <column name="des_scre" length="50" not-null="true">
+                <comment>bandera Festivo</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>usuario que crea registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>fecha creacion de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>fecha modificacion de registro</comment>
+            </column>
+        </property>
+        <set name="caupUsuaPrefs" table="caup_usua_pref" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_scre" not-null="true">
+                    <comment>Identificador subtipo de credencial</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaPref" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.GsabLogAccs" table="gsab_log_accs" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tabla de Log de Accesos al Sistema</comment>
+        <id name="idLogAccs" type="long">
+            <column name="id_log_accs" />
+            <generator class="assigned" />
+        </id>
+        <property name="usrName" type="string">
+            <column name="usr_name" length="10" not-null="true">
+                <comment>Nombre del usuario que accede al sistema</comment>
+            </column>
+        </property>
+        <property name="succ" type="short">
+            <column name="succ" not-null="true">
+                <comment>Indicador de &#233;xito de acceso al sistema</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true" />
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="ip" type="string">
+            <column name="ip" length="20">
+                <comment>IP desde la cual se realiza el intento de acceso</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

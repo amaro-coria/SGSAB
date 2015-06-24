@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CaupUsuaEmpl" table="caup_usua_empl" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tabla que asigna la tarjeta administrativa a un empleado</comment>
+        <id name="idUsuaEmpl" type="int">
+            <column name="id_usua_empl" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador de estatus en la tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador de tipo en la tabla cctm_cata</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmEmp" class="com.teknei.sitm.gsab.entities.CctmEmp" fetch="select">
+            <column name="id_emp" not-null="true">
+                <comment>Identificador del empleado en la tabla sfem_emp</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="sbopTarj" class="com.teknei.sitm.gsab.entities.SbopTarj" fetch="select">
+            <column name="id_tarj">
+                <comment>Identificador de tarjeta en la tabla sbop_tarj</comment>
+            </column>
+        </many-to-one>
+        <property name="fchIni" type="date">
+            <column name="fch_ini" length="13" not-null="true">
+                <comment>Fecha inicio asignaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="fchFin" type="date">
+            <column name="fch_fin" length="13" not-null="true">
+                <comment>Fecha fin de asignaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Nombre del usuario que cre&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Nombre del usuario que modific&#243; el resgistro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha de modificaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="conUsuaEmpl" type="string">
+            <column name="con_usua_empl" length="4">
+                <comment>Contrase&#241;a usuario empleado</comment>
+            </column>
+        </property>
+        <property name="iniUsuaEmpl" type="string">
+            <column name="ini_usua_empl" length="5">
+                <comment>Iniciales usuario empleado</comment>
+            </column>
+        </property>
+        <property name="idEqui" type="java.lang.Integer">
+            <column name="id_equi">
+                <comment>Identificador de equipo en sbeq_equi</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

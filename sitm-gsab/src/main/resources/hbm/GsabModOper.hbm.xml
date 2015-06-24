@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.GsabModOper" table="gsab_mod_oper" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Registro de modulos del sistema Gestor SAB</comment>
+        <id name="idModOper" type="int">
+            <column name="id_mod_oper" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomModOper" type="string">
+            <column name="nom_mod_oper" length="50" not-null="true">
+                <comment>Nombre de m&#243;dulo de operaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="desModOper" type="string">
+            <column name="des_mod_oper" length="100">
+                <comment>Descripci&#243;n del modulo de operaci&#243;n</comment>
+            </column>
+        </property>
+        <property name="idEsta" type="int">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador de estatus en tabla cctm_cata</comment>
+            </column>
+        </property>
+        <property name="idTipo" type="int">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador de tipo de carga en tabla cctm_cata</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha creac&#243;on de registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Usuario que modifica registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha modificaci&#243;n de registro</comment>
+            </column>
+        </property>
+        <set name="gsabPermPerfs" table="gsab_perm_perf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_mod_oper" not-null="true">
+                    <comment>Identificador del modulo de operaci&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.GsabPermPerf" />
+        </set>
+        <set name="gsabLogOpers" table="gsab_log_oper" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_mod_oper">
+                    <comment>Identificador del m&#243;dulo en donde se genera la operaci&#243;n</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.GsabLogOper" />
+        </set>
+    </class>
+</hibernate-mapping>

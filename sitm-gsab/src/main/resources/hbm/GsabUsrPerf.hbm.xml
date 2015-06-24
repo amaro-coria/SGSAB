@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.GsabUsrPerf" table="gsab_usr_perf" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Registro de usuarios por perfil al sistema Gestor SAB</comment>
+        <id name="idUsrPerf" type="int">
+            <column name="id_usr_perf" />
+            <generator class="foreign">
+                <param name="property">gsabPerfAccs</param>
+            </generator>
+        </id>
+        <one-to-one name="gsabPerfAccs" class="com.teknei.sitm.gsab.entities.GsabPerfAccs" constrained="true"></one-to-one>
+        <property name="idPerfAccs" type="int">
+            <column name="id_perf_accs" not-null="true">
+                <comment>Identificador del perfil de acceso en la tabla gsab_perf_accs</comment>
+            </column>
+        </property>
+        <property name="usrName" type="string">
+            <column name="usr_name" length="10" not-null="true" unique="true">
+                <comment>Nombre del usuario que accede al sistema</comment>
+            </column>
+        </property>
+        <property name="idEsta" type="int">
+            <column name="id_esta" not-null="true">
+                <comment>Identificador de estatus en tabla cctm_cata</comment>
+            </column>
+        </property>
+        <property name="idTipo" type="int">
+            <column name="id_tipo" not-null="true">
+                <comment>Identificador de tipo en tabla cctm_cata</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Nombre del usuario que cre&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Nombre del usuario que modific&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha de modificaci&#243;n del registro</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

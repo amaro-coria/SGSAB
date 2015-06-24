@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CctmEmp" table="cctm_emp" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Datos que identifican los empleados en el sistema</comment>
+        <id name="idEmp" type="int">
+            <column name="id_emp" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdLgarTrab" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_lgar_trab" not-null="true">
+                <comment>FK -Identificador del lugar de trabajo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo">
+                <comment>FK - Id tipo de cat&#225;logo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>FK - Id estado del registro</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmPers" class="com.teknei.sitm.gsab.entities.CctmPers" fetch="select">
+            <column name="id_pers" not-null="true">
+                <comment>FK -Idetificador de la persona</comment>
+            </column>
+        </many-to-one>
+        <property name="noEmp" type="string">
+            <column name="no_emp" length="20">
+                <comment>N&#250;mero de empleado dentro de la empresa</comment>
+            </column>
+        </property>
+        <property name="fchOpeAlta" type="date">
+            <column name="fch_ope_alta" length="13" not-null="true">
+                <comment>Fecha de alta del empleado en la emplresa</comment>
+            </column>
+        </property>
+        <property name="fchOpeBaja" type="date">
+            <column name="fch_ope_baja" length="13">
+                <comment>Fecha de baja del empleado en la emplresa</comment>
+            </column>
+        </property>
+        <property name="motBaja" type="string">
+            <column name="mot_baja" length="80">
+                <comment>Motivo de baja</comment>
+            </column>
+        </property>
+        <property name="cmnt" type="string">
+            <column name="cmnt" length="90">
+                <comment>Comentarios</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Fecja de baja del empleado en la empresa</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10">
+                <comment>Nombre del usuario que modific&#243; el registro</comment>
+            </column>
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29">
+                <comment>Fecha de modificaci&#243;n del registro</comment>
+            </column>
+        </property>
+        <set name="caupCeops" table="caup_ceop" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_emp" not-null="true">
+                    <comment>Identificador de responsable del centro de operaciones</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupCeop" />
+        </set>
+        <set name="caupUsuaEmpls" table="caup_usua_empl" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_emp" not-null="true">
+                    <comment>Identificador del empleado en la tabla sfem_emp</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.CaupUsuaEmpl" />
+        </set>
+        <set name="gsabDocuPerses" table="gsab_docu_pers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_emp">
+                    <comment>Identificador del empleado</comment>
+                </column>
+            </key>
+            <one-to-many class="com.teknei.sitm.gsab.entities.GsabDocuPers" />
+        </set>
+    </class>
+</hibernate-mapping>

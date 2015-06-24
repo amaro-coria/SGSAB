@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/06/2015 11:21:36 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.teknei.sitm.gsab.entities.CctmDire" table="cctm_dire" schema="sitm_gsab" optimistic-lock="version">
+        <comment>Tabla para almacenar las direcciones</comment>
+        <id name="idDire" type="int">
+            <column name="id_dire" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cctmCataByIdTipo" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_tipo" not-null="true">
+                <comment>For&#225;nea Tipo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCataByIdEsta" class="com.teknei.sitm.gsab.entities.CctmCata" fetch="select">
+            <column name="id_esta" not-null="true">
+                <comment>For&#225;nea Estatus</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCiud" class="com.teknei.sitm.gsab.entities.CctmCiud" fetch="select">
+            <column name="id_estd">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+            <column name="id_ciud">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmCodp" class="com.teknei.sitm.gsab.entities.CctmCodp" update="false" insert="false" fetch="select">
+            <column name="id_estd">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+            <column name="id_mncp">
+                <comment>For&#225;nea Tabla de Municipios</comment>
+            </column>
+            <column name="id_ciud">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+            <column name="id_codp">
+                <comment>For&#225;nea Tabla de codigo postal</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmColn" class="com.teknei.sitm.gsab.entities.CctmColn" update="false" insert="false" fetch="select">
+            <column name="id_estd">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+            <column name="id_mncp">
+                <comment>For&#225;nea Tabla de Municipios</comment>
+            </column>
+            <column name="id_codp">
+                <comment>For&#225;nea Tabla de codigo postal</comment>
+            </column>
+            <column name="id_coln">
+                <comment>For&#225;nea Tabla de colonia</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmEstd" class="com.teknei.sitm.gsab.entities.CctmEstd" update="false" insert="false" fetch="select">
+            <column name="id_estd">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="cctmMncp" class="com.teknei.sitm.gsab.entities.CctmMncp" update="false" insert="false" fetch="select">
+            <column name="id_estd">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+            <column name="id_mncp">
+                <comment>For&#225;nea Tabla de Municipios</comment>
+            </column>
+            <column name="id_ciud">
+                <comment>For&#225;nea Tabla de ciudades</comment>
+            </column>
+        </many-to-one>
+        <property name="latDire" type="java.lang.Double">
+            <column name="lat_dire" precision="17" scale="17">
+                <comment>latitud</comment>
+            </column>
+        </property>
+        <property name="lonDire" type="java.lang.Double">
+            <column name="lon_dire" precision="17" scale="17">
+                <comment>longitud</comment>
+            </column>
+        </property>
+        <property name="callDire" type="string">
+            <column name="call_dire" length="70">
+                <comment>Calle de la direcion</comment>
+            </column>
+        </property>
+        <property name="nintDire" type="string">
+            <column name="nint_dire" length="10">
+                <comment>Numero Interior</comment>
+            </column>
+        </property>
+        <property name="nextDire" type="string">
+            <column name="next_dire" length="10">
+                <comment>Numero Exterior</comment>
+            </column>
+        </property>
+        <property name="idTipoUbi" type="java.lang.Integer">
+            <column name="id_tipo_ubi">
+                <comment>For&#225;nea Tabla de Cata tipo de ubicacion</comment>
+            </column>
+        </property>
+        <property name="usrCrea" type="string">
+            <column name="usr_crea" length="10" not-null="true">
+                <comment>Usuario que creo el registro</comment>
+            </column>
+        </property>
+        <property name="fchCrea" type="timestamp">
+            <column name="fch_crea" length="29" not-null="true">
+                <comment>Fecha de creacion del registro</comment>
+            </column>
+        </property>
+        <property name="usrModi" type="string">
+            <column name="usr_modi" length="10" />
+        </property>
+        <property name="fchModi" type="timestamp">
+            <column name="fch_modi" length="29" />
+        </property>
+    </class>
+</hibernate-mapping>
